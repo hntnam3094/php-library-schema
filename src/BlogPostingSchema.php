@@ -145,7 +145,7 @@ class BlogPostingSchema implements Schema
          }
         }
          * */
-        $objImage = (object)[
+        return (object)[
             "@type" => "ImageObject",
             "license" => $data->termOfUse,
             "acquireLicensePage" => $data->url,
@@ -158,7 +158,6 @@ class BlogPostingSchema implements Schema
             "height" => $data->imageHeight,
             "creator" => $data->author
         ];
-        return $objImage;
     }
 
     public function generateAuthor($data)

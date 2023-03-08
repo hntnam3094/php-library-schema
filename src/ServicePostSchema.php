@@ -382,7 +382,7 @@ class ServicePostSchema implements Schema
          }
          }
          * */
-        $objImage = (object)[
+        return (object)[
             "@type" => "ImageObject",
             'name' => $data->imageAlt,
             "license" => $data->termOfUse,
@@ -397,7 +397,6 @@ class ServicePostSchema implements Schema
             "height" => $data->imageHeight,
             "creator" => $data->author
         ];
-        return $objImage;
     }
 
     public function generateAuthor($data)
