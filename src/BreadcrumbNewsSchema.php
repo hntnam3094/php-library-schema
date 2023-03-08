@@ -31,7 +31,7 @@ class  BreadcrumbNewsSchema {
             ]
          ]
          * */
-        $html = '<div itemscope itemtype="https://schema.org/BreadcrumbList" class="breadcrumb_musk pt-15 pb-15">';
+        $html = '<div itemscope itemtype="https://schema.org/BreadcrumbList" class="breadcrumb_schema pt-15 pb-15">';
         $html .= '<ul class="flexBox">';
         $html .= '<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
         $html .= '<a itemprop="item" href="' . $home['url'] .'">';
