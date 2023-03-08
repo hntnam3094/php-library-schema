@@ -1,0 +1,13 @@
+{
+    "name": "vinaweber/seo_schema",
+    "type": "library",
+    "require": {
+
+    },
+    "autoload": {
+        "psr-4": {
+            "Vinaweber\\VWCache\\": "src"
+        }
+    },
+    "description": ""
+}
