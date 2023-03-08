@@ -174,7 +174,7 @@ class BlogPostingSchema implements Schema
          }
         */
 
-        $author = [
+        return [
             '@type' => 'Person',
             '@id' => $data->id,
             'image' => $data->authorImage,
@@ -182,6 +182,5 @@ class BlogPostingSchema implements Schema
             'description' => $data->authorDescription,
             'url' => $data->authorUrl
         ];
-        return $author;
     }
 }
