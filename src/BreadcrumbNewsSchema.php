@@ -3,11 +3,15 @@ namespace Vinaweber\SEOSchema;
 
 class  BreadcrumbNewsSchema {
 
-    public function generateBreadcrumbNews($home, $dataBreadCrumb)
+    public function generateBreadcrumb($home, $dataBreadCrumb): string
     {
         /*
          * Lấy tất cả các cấp cha con của breadcrumb đó
          * Ví dụ:
+         * [
+         *   'title' => 'Trang chủ',
+         *   'url' => 'trangchu.com'
+         * ]
          [
             [
                 'url' => 'http://dev.musk.com/tin-tuc',
@@ -27,7 +31,7 @@ class  BreadcrumbNewsSchema {
             ]
          ]
          * */
-        $html = '<div itemscope itemtype="https://schema.org/BreadcrumbList" class="breadcrumb_schema pt-15 pb-15">';
+        $html = '<div itemscope itemtype="https://schema.org/BreadcrumbList" class="breadcrumb_musk pt-15 pb-15">';
         $html .= '<ul class="flexBox">';
         $html .= '<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
         $html .= '<a itemprop="item" href="' . $home['url'] .'">';
@@ -38,27 +42,25 @@ class  BreadcrumbNewsSchema {
 
         if (isset($dataBreadCrumb) && count($dataBreadCrumb) > 0) {
             foreach ($dataBreadCrumb as $key => $item) {
-                if (!empty($item['url'])) {
-                    $html .= '<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+                $html .= '<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+                if (!empty($item['url'])){
                     $html .= '<a itemprop="item" href="' . $item['url'] . '">';
                     $html .= '<span itemprop="name">' . $item['title'] . '</span>';
-                    $html .= '<meta itemprop="position" content="' . ($key + 2) . '" />';
+                    $html .= '<meta itemprop="position" content="'. ($key + 2) .'" />';
                     $html .= '</a>';
-                    $html .= '</li>';
-                } else {
-                    $html .= '<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+                }
+                else{
                     $html .= '<a itemprop="item" style="cursor: text">';
                     $html .= '<span itemprop="name">' . $item['title'] . '</span>';
-                    $html .= '<meta itemprop="position" content="' . ($key + 2) . '" />';
+                    $html .= '<meta itemprop="position" content="'. ($key + 2) .'" />';
                     $html .= '</a>';
-                    $html .= '</li>';
                 }
+                $html .= '</li>';
             }
         }
 
         $html .= '</ul>';
         $html .= '</div>';
-
         return $html;
     }
 

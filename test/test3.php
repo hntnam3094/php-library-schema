@@ -26,4 +26,4 @@ $data = [
         'title' => 'Review điện thoại'
     ]
 ];
-echo $lib->generateBreadcrumbNews($dataHome, $data);
+echo $lib->generateBreadcrumb($dataHome, $data);

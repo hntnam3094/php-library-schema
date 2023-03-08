@@ -2,8 +2,8 @@
 
 require_once '../vendor/autoload.php';
 
-use Vinaweber\SEOSchema\BreadcumbNewsDetailSchema;
-$lib = new BreadcumbNewsDetailSchema();
+use Vinaweber\SEOSchema\BreadcrumbNewsSchema;
+$lib = new BreadcrumbNewsSchema();
 $dataHome = [
     'url' => 'https://jsonformatter.org',
     'title' => 'Trang chủ'
@@ -30,4 +30,4 @@ $data = [
         'title' => 'Bài viết của tôi'
     ]
 ];
-echo $lib->generateBreadcrumbDetailNews($dataHome, $data);
+echo $lib->generateBreadcrumb($dataHome, $data);
