@@ -6,7 +6,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Vinaweber\\VWCache\\": "src"
+            "Vinaweber\\SEOSchema\\": "src"
         }
     },
     "description": ""

@@ -2,7 +2,7 @@
 
 require '../src/VWCache.php';
 
-$vwCache = new \Vinaweber\VWCache\VWCache();
+$vwCache = new \Vinaweber\VWCache\FAQSchema();
 $vwCache->setUrlPrefix('http://localhost/proje');
 $vwCache->start();
 
