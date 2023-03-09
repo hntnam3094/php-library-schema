@@ -26,7 +26,7 @@ class BlogPostingSchema implements Schema
     private $schemaVersion;
     private $accessMode;
 
-    public function __construct($data)
+    public function __construct($data = null)
     {
         $this->id = $data->id ?? '';
         $this->headline = $data->headline ?? '';
@@ -187,7 +187,7 @@ class BlogPostingSchema implements Schema
         return json_encode($schema);
     }
 
-    public function buildObjectImage($data)
+    public function buildObjectImage($data = null)
     {
         return (object)[
             "@type" => "ImageObject",
@@ -195,7 +195,6 @@ class BlogPostingSchema implements Schema
             "acquireLicensePage" => $data->acquireLicensePage,
             "creditText" => $data->creditText,
             "copyrightNotice" => $data->copyrightNotice,
-            "alternativeHeadline" => $data->alternativeHeadline,
             "caption" => $data->caption,
             "url" => $data->url,
             "width" => $data->width,
@@ -204,7 +203,7 @@ class BlogPostingSchema implements Schema
         ];
     }
 
-    public function buildAuthor($data)
+    public function buildAuthor($data = null)
     {
         return [
             '@type' => 'Person',
@@ -216,7 +215,7 @@ class BlogPostingSchema implements Schema
         ];
     }
 
-    public function buildMentions($data)
+    public function buildMentions($data = null)
     {
         return (object)[
             "@type" => "Thing",
