@@ -7,108 +7,113 @@ class ServicePostSchema implements Schema
     private $url;
     private $id;
     private $name;
-    private $images = [];
+    private $image = [];
     private $description;
     private $category;
     private $serviceType;
     private $termsOfService;
-    private $keywords = [];
+    private $alternateName = [];
     private $logo;
-    private $author;
     private $aggregateRating;
     private $areaServed;
     private $broker;
+    private $brand;
     private $provider;
     private $providerMobility;
     private $isSimilarTo = [];
     private $isRelatedTo = [];
     private $hoursAvailable = [];
     private $potentialAction = [];
+    private $defaulthoursAvailable = [];
+    private $defaultpotentialAction = [];
 
-    public function __construct($data) {
+    public function __construct($data = null) {
+        $this->defaulthoursAvailable = [
+            (object)[
+                "@type" => "OpeningHoursSpecification",
+                "dayOfWeek" => "http://schema.org/Monday",
+                "opens" => "8:00",
+                "closes" => "18:00"
+            ],
+            (object)[
+                "@type" => "OpeningHoursSpecification",
+                "dayOfWeek" => "http://schema.org/Tuesday",
+                "opens" => "8:00",
+                "closes" => "18:00"
+            ],
+            (object)[
+                "@type" => "OpeningHoursSpecification",
+                "dayOfWeek" => "http://schema.org/Wednesday",
+                "opens" => "8:00",
+                "closes" => "18:00"
+            ],
+            (object)[
+                "@type" => "OpeningHoursSpecification",
+                "dayOfWeek" => "http://schema.org/Thursday",
+                "opens" => "8:00",
+                "closes" => "18:00"
+            ],
+            (object)[
+                "@type" => "OpeningHoursSpecification",
+                "dayOfWeek" => "http://schema.org/Friday",
+                "opens" => "8:00",
+                "closes" => "18:00"
+            ],
+            (object)[
+                "@type" => "OpeningHoursSpecification",
+                "dayOfWeek" => "http://schema.org/Saturday",
+                "opens" => "8:00",
+                "closes" => "18:00"
+            ]
+        ];
+
+        $this->defaultpotentialAction = [
+            (object)[
+                "@type" => "SearchAction",
+                "instrument" => ["laptop","pc","tablet","phone"]
+            ],
+            (object)[
+                "@type" => "ViewAction",
+                "instrument" => ["laptop","pc","tablet","phone"]
+            ],
+            (object)[
+                "@type" => "BuyAction",
+                "instrument" => ["laptop","pc","tablet","phone"]
+            ],
+            (object)[
+                "@type" => "AskAction",
+                "instrument" => ["laptop","pc","tablet","phone"]
+            ],
+            (object)[
+                "@type" => "InteractAction",
+                "instrument" => ["laptop","pc","tablet","phone"],
+                "target" => (object)[
+                    "@type" => "EntryPoint",
+                    "actionPlatform" => "https://schema.org/DigitalPlatformEnumeration"
+                ]
+            ]
+        ];
+
         $this->url = $data->url ?? '';
         $this->id = $data->id ?? '';
         $this->name = $data->name ?? '';
-        $this->images = $data->images ?? [];
+        $this->image = $data->image ?? [];
         $this->description = $data->description ?? '';
         $this->category = $data->category ?? null;
         $this->serviceType = $data->serviceType ?? '';
         $this->termsOfService = $data->termsOfService ?? null;
-        $this->keywords = $data->keywords ?? [];
+        $this->alternateName = $data->alternateName ?? [];
         $this->logo = $data->logo ?? null;
-        $this->author = $data->author ?? null;
         $this->aggregateRating = $data->aggregateRating ?? null;
         $this->areaServed = $data->areaServed ?? null;
         $this->broker = $data->broker ?? null;
+        $this->brand = $data->brand ?? null;
         $this->provider = $data->provider ?? null;
         $this->providerMobility = $data->providerMobility ?? null;
         $this->isSimilarTo = $data->isSimilarTo ?? [];
         $this->isRelatedTo = $data->isRelatedTo ?? [];
-        $this->hoursAvailable = $data->hoursAvailable ?? [
-                (object)[
-                    "@type" => "OpeningHoursSpecification",
-                    "dayOfWeek" => "http://schema.org/Monday",
-                    "opens" => "8:00",
-                    "closes" => "18:00"
-                ],
-                (object)[
-                    "@type" => "OpeningHoursSpecification",
-                    "dayOfWeek" => "http://schema.org/Tuesday",
-                    "opens" => "8:00",
-                    "closes" => "18:00"
-                ],
-                (object)[
-                    "@type" => "OpeningHoursSpecification",
-                    "dayOfWeek" => "http://schema.org/Wednesday",
-                    "opens" => "8:00",
-                    "closes" => "18:00"
-                ],
-                (object)[
-                    "@type" => "OpeningHoursSpecification",
-                    "dayOfWeek" => "http://schema.org/Thursday",
-                    "opens" => "8:00",
-                    "closes" => "18:00"
-                ],
-                (object)[
-                    "@type" => "OpeningHoursSpecification",
-                    "dayOfWeek" => "http://schema.org/Friday",
-                    "opens" => "8:00",
-                    "closes" => "18:00"
-                ],
-                (object)[
-                    "@type" => "OpeningHoursSpecification",
-                    "dayOfWeek" => "http://schema.org/Saturday",
-                    "opens" => "8:00",
-                    "closes" => "18:00"
-                ]
-            ];
-
-        $this->potentialAction = $data->potentialAction ?? [
-                (object)[
-                    "@type" => "SearchAction",
-                    "instrument" => ["laptop","pc","tablet","phone"]
-                ],
-                (object)[
-                    "@type" => "ViewAction",
-                    "instrument" => ["laptop","pc","tablet","phone"]
-                ],
-                (object)[
-                    "@type" => "BuyAction",
-                    "instrument" => ["laptop","pc","tablet","phone"]
-                ],
-                (object)[
-                    "@type" => "AskAction",
-                    "instrument" => ["laptop","pc","tablet","phone"]
-                ],
-                (object)[
-                    "@type" => "InteractAction",
-                    "instrument" => ["laptop","pc","tablet","phone"],
-                    "target" => (object)[
-                        "@type" => "EntryPoint",
-                        "actionPlatform" => "https://schema.org/DigitalPlatformEnumeration"
-                    ]
-                ]
-            ];
+        $this->hoursAvailable = $data->hoursAvailable ?? $this->defaulthoursAvailable;
+        $this->potentialAction = $data->potentialAction ?? $this->defaultpotentialAction;
     }
 
     public function setUrl($url) {
@@ -123,8 +128,8 @@ class ServicePostSchema implements Schema
         $this->name = $name;
     }
 
-    public function setImages($images) {
-        $this->images = $images;
+    public function setImage($image) {
+        $this->image = $image;
     }
 
     public function setDescription($description) {
@@ -143,16 +148,12 @@ class ServicePostSchema implements Schema
         $this->termsOfService = $termsOfService;
     }
 
-    public function setKeywords($keywords) {
-        $this->keywords = $keywords;
+    public function setAlternateName($alternateName) {
+        $this->alternateName = $alternateName;
     }
 
     public function setLogo($logo) {
         $this->logo = $logo;
-    }
-
-    public function setAuthor($author) {
-        $this->author = $author;
     }
 
     public function setAggregateRating($aggregateRating) {
@@ -165,6 +166,10 @@ class ServicePostSchema implements Schema
 
     public function setBroker($broker) {
         $this->broker = $broker;
+    }
+
+    public function setBrand($brand) {
+        $this->brand = $brand;
     }
 
     public function setProvider($provider) {
@@ -182,6 +187,14 @@ class ServicePostSchema implements Schema
     public function setIsRelatedTo($isRelatedTo) {
         $this->isRelatedTo = $isRelatedTo;
     }
+
+    public function sethoursAvailable($hoursAvailable = null) {
+        $this->hoursAvailable = $hoursAvailable ?? $this->defaulthoursAvailable;
+    }
+
+    public function setpotentialAction($potentialAction = null) {
+        $this->potentialAction = $potentialAction ?? $this->defaultpotentialAction;
+    }
     
     public function buildSchema()
     {
@@ -192,28 +205,28 @@ class ServicePostSchema implements Schema
             '@id' => $this->id ?? '',
             'mainEntityOfPage' => $this->url ?? '',
             'name' => $this->name ?? '',
-            'image' => $this->images ?? [],
+            'image' => $this->image ?? [],
             'description' => $this->description ?? '',
             "category" => $this->category,
             "serviceType" => $this->serviceType ?? '',
             "termsOfService" => $this->termsOfService,
-            'alternateName' => $this->keywords ?? [],
+            'alternateName' => $this->alternateName ?? '',
             "logo" => $this->logo,
-            "brand" => $this->author ?? '',
-            "aggregateRating" => $this->aggregateRating,
-            "areaServed" => $this->areaServed,
+            "brand" => $this->brand ?? '',
+            "aggregateRating" => $this->aggregateRating ?? (object)[],
+            "areaServed" => $this->areaServed ?? (object)[],
             "broker" => $this->broker ?? '',
             "provider" => $this->provider ?? '',
-            "providerMobility" => $this->providerMobility,
-            "hoursAvailable" => $this->hoursAvailable,
-            "potentialAction" => $this->potentialAction,
+            "providerMobility" => $this->providerMobility ?? '',
+            "hoursAvailable" => $this->hoursAvailable ?? [],
+            "potentialAction" => $this->potentialAction ?? [],
             "isSimilarTo" => $this->isSimilarTo ?? [],
             "isRelatedTo" => $this->isRelatedTo ?? []
         ];
         return json_encode($schema);
     }
 
-    public function buildObjectImage($data)
+    public function buildObjectImage($data = null)
     {
         return (object)[
             "@type" => "ImageObject",
@@ -232,7 +245,7 @@ class ServicePostSchema implements Schema
         ];
     }
 
-    public function buildAuthor($data)
+    public function buildAuthor($data = null)
     {
         return [
             '@type' => 'Person',
@@ -244,7 +257,7 @@ class ServicePostSchema implements Schema
         ];
     }
 
-    public function buildCategory ($data) {
+    public function buildCategory ($data = null) {
         return (object)[
             "@type"=>"Thing",
             "name"=> $data->name ?? '',
@@ -254,7 +267,7 @@ class ServicePostSchema implements Schema
         ];
     }
 
-    public function buildLogo ($data) {
+    public function buildLogo ($data = null) {
         return (object)[
             "@type" => "ImageObject",
             "url"=> $data->url ?? '',
@@ -266,7 +279,7 @@ class ServicePostSchema implements Schema
         ];
     }
 
-    public function buildAggregateRating ($data) {
+    public function buildAggregateRating ($data = null) {
         return (object)[
             "@type" =>  "AggregateRating",
             "itemReviewed" => (object)[
@@ -282,7 +295,7 @@ class ServicePostSchema implements Schema
         ];
     }
 
-    public function buildAreaServed ($data) {
+    public function buildAreaServed ($data = null) {
         return (object)[
             "@type" => "Place",
             "address" =>  (object)[
@@ -295,7 +308,7 @@ class ServicePostSchema implements Schema
         ];
     }
 
-    public function buildIsSimilarTo ($data) {
+    public function buildIsSimilarTo ($data = null) {
         return (object)[
             "@type" => "Thing",
             "name" => $data->name,
@@ -305,7 +318,7 @@ class ServicePostSchema implements Schema
         ];
     }
 
-    public function buildIsRelatedTo ($data) {
+    public function buildIsRelatedTo ($data = null) {
         return (object)[
             "@type" => "Thing",
             "name" => $data->name,
