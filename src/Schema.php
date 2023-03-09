@@ -3,9 +3,9 @@ namespace Vinaweber\SEOSchema;
 
 interface Schema
 {
-    public function generateSchema($data);
+    public function buildSchema();
 
-    public function generateObjectImage($data);
+    public function buildObjectImage($data);
 
-    public function generateAuthor($data);
+    public function buildAuthor($data);
 }
