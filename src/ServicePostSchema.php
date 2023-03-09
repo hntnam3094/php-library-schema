@@ -4,289 +4,47 @@ namespace Vinaweber\SEOSchema;
 
 class ServicePostSchema implements Schema
 {
-    public function generateSchema($data)
-    {
-        /*{
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "alternateName": [
-         "cho",
-         " meo",
-         " ga",
-         " vit",
-         " voi",
-         " ho",
-         " ran",
-         " su tu",
-         " ha ma"
-        ],
-        "url": "https://dev.musk.vinaweber.com/sua-tivi-huyen-nha-be-tp-ho-chi-minh",
-        "@id": "https://dev.musk.vinaweber.com/sua-tivi-huyen-nha-be-tp-ho-chi-minh#service",
-        "mainEntityOfPage": "https://dev.musk.vinaweber.com/sua-tivi-huyen-nha-be-tp-ho-chi-minh",
-        "name": "Dịch vụ sửa tivi tại nhà huyện Nhà Bè uy tín, đáng tin cậy",
-        "image": [
-         {
-           "@type": "ImageObject",
-           "name": "Mẫu biệt thự 5 tầng đẹp",
-           "license": "https://dev.musk.vinaweber.com/dieu-khoan-su-dung.html",
-           "acquireLicensePage": "https://dev.musk.vinaweber.com/sua-tivi-huyen-nha-be-tp-ho-chi-minh",
-           "creditText": "Musk.vn",
-           "copyrightNotice": "Musk.vn",
-           "alternativeHeadline": "Mẫu biệt thự 5 tầng đẹp",
-           "thumbnailUrl": "https://dev.musk.vinaweber.comhttps://dev.musk.vinaweber.com/images/no-image.jpg",
-           "caption": "",
-           "url": "https://dev.musk.vinaweber.comhttps://dev.musk.vinaweber.com/images/no-image.jpg",
-           "width": "",
-           "height": "",
-           "creator": {
-             "@type": "Person",
-             "@id": "https://musk.vn/le-thai-hung.html#person",
-             "image": "https://dev.musk.vinaweber.com/images/no-image.jpg",
-             "name": "CEO Lê Thái Hưng",
-             "description": "Giới thiệu nhà sáng lập của sàn TMĐT Musk.vn - Lê Thái Hưng",
-             "url": "https://musk.vn/le-thai-hung.html"
-           }
-         }
-        ],
-        "description": "Sửa tivi tại nhà huyện Nhà Bè ở các đơn vị tại Musk.vn được nhiều người lựa chọn. Dịch vụ sửa chữa tivi giá rẻ, nhanh chóng, xem ngay bài viết để hiểu rõ nhé",
-        "category": {
-         "@type": "Thing",
-         "name": "Dịch vụ sửa tivi tại nhà huyện Nhà Bè | Thợ sửa chữa uy tín",
-         "url": "https://dev.musk.vinaweber.com/sua-tivi-huyen-nha-be-tp-ho-chi-minh",
-         "@id": "https://dev.musk.vinaweber.com/sua-tivi-huyen-nha-be-tp-ho-chi-minh#category",
-         "mainEntityOfPage": "https://dev.musk.vinaweber.com/sua-tivi-huyen-nha-be-tp-ho-chi-minh"
-        },
-        "serviceType": "dsa dsad adsa dsa dsa dsadas",
-        "termsOfService": [
-         "https://dev.musk.vinaweber.com/chinh-sach-bao-mat-thong-tin.html",
-         "https://dev.musk.vinaweber.com/dieu-khoan-su-dung.html"
-        ],
-        "logo": {
-         "@type": "ImageObject",
-         "url": "https://dev.musk.vinaweber.com/seo/sua-tivi-huyen-nha-be/sua-tivi-huyen-nha-be.jpg",
-         "representativeOfPage": "true",
-         "name": "Dịch vụ sửa tivi tại nhà huyện Nhà Bè | Thợ sửa chữa uy tín",
-         "caption": "Sửa tivi tại nhà huyện Nhà Bè ở các đơn vị tại Musk.vn được nhiều người lựa chọn. Dịch vụ sửa chữa tivi giá rẻ, nhanh chóng, xem ngay bài viết để hiểu rõ nhé",
-         "width": 768,
-         "height": 567
-        },
-        "brand": {
-         "@type": "Person",
-         "@id": "https://musk.vn/le-thai-hung.html#person",
-         "image": "https://dev.musk.vinaweber.com/images/no-image.jpg",
-         "name": "CEO Lê Thái Hưng",
-         "description": "Giới thiệu nhà sáng lập của sàn TMĐT Musk.vn - Lê Thái Hưng",
-         "url": "https://musk.vn/le-thai-hung.html"
-        },
-        "aggregateRating": {
-         "@type": "AggregateRating",
-         "itemReviewed": {
-           "@type": "CreativeWorkSeries",
-           "name": "Dịch vụ sửa tivi tại nhà huyện Nhà Bè uy tín, đáng tin cậy",
-           "description": "Sửa tivi tại nhà huyện Nhà Bè ở các đơn vị tại Musk.vn được nhiều người lựa chọn. Dịch vụ sửa chữa tivi giá rẻ, nhanh chóng, xem ngay bài viết để hiểu rõ nhé",
-           "url": "https://dev.musk.vinaweber.com/sua-tivi-huyen-nha-be-tp-ho-chi-minh",
-           "mainEntityofPage": "https://dev.musk.vinaweber.com/sua-tivi-huyen-nha-be-tp-ho-chi-minh"
-         },
-         "ratingValue": "88",
-         "bestRating": "100",
-         "ratingCount": "20"
-        },
-        "areaServed": {
-         "@type": "Place",
-         "address": {
-           "@type": "PostalAddress",
-           "addressLocality": "123",
-           "addressRegion": "3445",
-           "postalCode": "567",
-           "streetAddress": "789"
-         }
-        },
-        "broker": {
-         "@type": "Person",
-         "@id": "https://musk.vn/le-thai-hung.html#person",
-         "image": "https://dev.musk.vinaweber.com/images/no-image.jpg",
-         "name": "CEO Lê Thái Hưng",
-         "description": "Giới thiệu nhà sáng lập của sàn TMĐT Musk.vn - Lê Thái Hưng",
-         "url": "https://musk.vn/le-thai-hung.html"
-        },
-        "provider": {
-         "@type": "Person",
-         "@id": "https://musk.vn/le-thai-hung.html#person",
-         "image": "https://dev.musk.vinaweber.com/images/no-image.jpg",
-         "name": "CEO Lê Thái Hưng",
-         "description": "Giới thiệu nhà sáng lập của sàn TMĐT Musk.vn - Lê Thái Hưng",
-         "url": "https://musk.vn/le-thai-hung.html"
-        },
-        "providerMobility": "dynamic",
-        "hoursAvailable": [
-         {
-           "@type": "OpeningHoursSpecification",
-           "dayOfWeek": "http://schema.org/Monday",
-           "opens": "8:00",
-           "closes": "18:00"
-         },
-         {
-           "@type": "OpeningHoursSpecification",
-           "dayOfWeek": "http://schema.org/Tuesday",
-           "opens": "8:00",
-           "closes": "18:00"
-         },
-         {
-           "@type": "OpeningHoursSpecification",
-           "dayOfWeek": "http://schema.org/Wednesday",
-           "opens": "8:00",
-           "closes": "18:00"
-         },
-         {
-           "@type": "OpeningHoursSpecification",
-           "dayOfWeek": "http://schema.org/Thursday",
-           "opens": "8:00",
-           "closes": "18:00"
-         },
-         {
-           "@type": "OpeningHoursSpecification",
-           "dayOfWeek": "http://schema.org/Friday",
-           "opens": "8:00",
-           "closes": "18:00"
-         },
-         {
-           "@type": "OpeningHoursSpecification",
-           "dayOfWeek": "http://schema.org/Saturday",
-           "opens": "8:00",
-           "closes": "18:00"
-         }
-        ],
-        "potentialAction": [
-         {
-           "@type": "SearchAction",
-           "instrument": [
-             "laptop",
-             "pc",
-             "tablet",
-             "phone"
-           ]
-         },
-         {
-           "@type": "ViewAction",
-           "instrument": [
-             "laptop",
-             "pc",
-             "tablet",
-             "phone"
-           ]
-         },
-         {
-           "@type": "BuyAction",
-           "instrument": [
-             "laptop",
-             "pc",
-             "tablet",
-             "phone"
-           ]
-         },
-         {
-           "@type": "AskAction",
-           "instrument": [
-             "laptop",
-             "pc",
-             "tablet",
-             "phone"
-           ]
-         },
-         {
-           "@type": "InteractAction",
-           "instrument": [
-             "laptop",
-             "pc",
-             "tablet",
-             "phone"
-           ],
-           "target": {
-             "@type": "EntryPoint",
-             "actionPlatform": "https://schema.org/DigitalPlatformEnumeration"
-           }
-         }
-        ],
-        "isSimilarTo": [ VD: khai báo tầng con, với https://musk.vn/cong-nhom-duc-tp-ho-chi-minh không có tầng con chỉ có tầng ngang. e ví dụ khác với https://musk.vn/thu-mua-xe-cu-tp-ho-chi-minh thì sẽ có tầng con là thu mua xe tải, xe nâng, xe đầu kéo, xe ô tô => khai báo isSimilarTo
-         {
-           "@type": "Thing",
-           "name": null,
-           "description": "Sửa máy tính",
-           "mainEntityOfPage": "https://dev.musk.vinaweber.com./sua-may-tinh",
-           "url": "https://dev.musk.vinaweber.com/sua-may-tinh"
-         }
-        ],
-        "isRelatedTo": [ VD: khai báo link tầng ngang với cổng nhôm đúc thì tầng ngang của cổng nhôm đúc sẽ là ban công nhôm đúc, cầu thang nhôm đúc,..  e ví dụ khác với https://musk.vn/thu-mua-xe-cu-tp-ho-chi-minh thì sẽ có tầng ngang thì không cần khai báo
-         {
-           "@type": "Thing",
-           "name": null,
-           "description": "Sửa tivi",
-           "mainEntityOfPage": "https://dev.musk.vinaweber.com./sua-tivi",
-           "url": "https://dev.musk.vinaweber.com/sua-tivi"
-         }
-        ]
-        }*/
-        $schema = (object)[
-            "@context" => "https://schema.org",
-            '@type' => 'Service',
-            "alternateName" => $data->keywords ?? [],
-            'url' => $data->url ?? '',
-            '@id' => $data->id ?? '',
-            'mainEntityOfPage' => $data->url ?? '',
-            'name' => $data->name ?? '',
-            'image' => $data->images ?? [],
-            'description' => $data->description ?? '',
-            "category" => (object)[
-                "@type"=>"Thing",
-                "name"=> $data->name ?? '',
-                "url"=> $data->url ?? '',
-                "@id"=> $data->categoryId ?? '',
-                "mainEntityOfPage"=> $data->url ?? '',
-            ],
-            "serviceType" => $data->serviceType ?? '',
-            "termsOfService" => [
-                $data->privacyPolicy ?? '',
-                $data->termsOfUse ?? ''
-            ],
-            'alternateName' => $data->keywords ?? [],
-            "logo" => (object)[
-                "@type" => "ImageObject",
-                "url"=> $data->logoUrl ?? '',
-                "representativeOfPage"=>"true",
-                "name"=> $data->logoName ?? '',
-                "caption"=> $data->logoDescription ?? '',
-                "width"=> $data->logoWidth ?? 0,
-                "height"=> $data->logoHeight ?? 0
-            ],
-            "brand" => $data->author ?? '',
-            "aggregateRating" => (object)[
-                "@type" =>  "AggregateRating",
-                "itemReviewed" => (object)[
-                    "@type" => "CreativeWorkSeries",
-                    "name" => $data->name ?? '',
-                    "description" => $data->description ?? '',
-                    "url" => $data->url ?? '',
-                    "mainEntityofPage" => $data->url ?? ''
-                ],
-                "ratingValue" => "88",
-                "bestRating" => "100",
-                "ratingCount" => "20"
-            ],
-            "areaServed" =>  (object)[
-                "@type" => "Place",
-                "address" =>  (object)[
-                    "@type" =>  "PostalAddress",
-                    "addressLocality" => $data->addressLocality ?? '',
-                    "addressRegion" => $data->addressRegion ?? '',
-                    "postalCode" => $data->postalCode ?? '',
-                    "streetAddress" => $data->streetAddress ?? ''
-                ]
-            ],
+    private $url;
+    private $id;
+    private $name;
+    private $images = [];
+    private $description;
+    private $category;
+    private $serviceType;
+    private $termsOfService;
+    private $keywords = [];
+    private $logo;
+    private $author;
+    private $aggregateRating;
+    private $areaServed;
+    private $broker;
+    private $provider;
+    private $providerMobility;
+    private $isSimilarTo = [];
+    private $isRelatedTo = [];
+    private $hoursAvailable = [];
+    private $potentialAction = [];
 
-            "broker" => $data->author ?? '',
-            "provider" => $data->author ?? '',
-            "providerMobility" => "dynamic",
-            "hoursAvailable" => [
+    public function __construct($data) {
+        $this->url = $data->url ?? '';
+        $this->id = $data->id ?? '';
+        $this->name = $data->name ?? '';
+        $this->images = $data->images ?? [];
+        $this->description = $data->description ?? '';
+        $this->category = $data->category ?? null;
+        $this->serviceType = $data->serviceType ?? '';
+        $this->termsOfService = $data->termsOfService ?? null;
+        $this->keywords = $data->keywords ?? [];
+        $this->logo = $data->logo ?? null;
+        $this->author = $data->author ?? null;
+        $this->aggregateRating = $data->aggregateRating ?? null;
+        $this->areaServed = $data->areaServed ?? null;
+        $this->broker = $data->broker ?? null;
+        $this->provider = $data->provider ?? null;
+        $this->providerMobility = $data->providerMobility ?? null;
+        $this->isSimilarTo = $data->isSimilarTo ?? [];
+        $this->isRelatedTo = $data->isRelatedTo ?? [];
+        $this->hoursAvailable = $data->hoursAvailable ?? [
                 (object)[
                     "@type" => "OpeningHoursSpecification",
                     "dayOfWeek" => "http://schema.org/Monday",
@@ -323,8 +81,9 @@ class ServicePostSchema implements Schema
                     "opens" => "8:00",
                     "closes" => "18:00"
                 ]
-            ],
-            "potentialAction" => [
+            ];
+
+        $this->potentialAction = $data->potentialAction ?? [
                 (object)[
                     "@type" => "SearchAction",
                     "instrument" => ["laptop","pc","tablet","phone"]
@@ -349,76 +108,210 @@ class ServicePostSchema implements Schema
                         "actionPlatform" => "https://schema.org/DigitalPlatformEnumeration"
                     ]
                 ]
-            ],
-            "isSimilarTo" => $data->isSimilarTo ?? [],
-            "isRelatedTo" => $data->isRelatedTo ?? []
+            ];
+    }
+
+    public function setUrl($url) {
+        $this->url = $url;
+    }
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+
+    public function setName($name) {
+        $this->name = $name;
+    }
+
+    public function setImages($images) {
+        $this->images = $images;
+    }
+
+    public function setDescription($description) {
+        $this->description = $description;
+    }
+
+    public function setCategory($category) {
+        $this->category = $category;
+    }
+
+    public function setServiceType($serviceType) {
+        $this->serviceType = $serviceType;
+    }
+
+    public function setTermsOfService($termsOfService) {
+        $this->termsOfService = $termsOfService;
+    }
+
+    public function setKeywords($keywords) {
+        $this->keywords = $keywords;
+    }
+
+    public function setLogo($logo) {
+        $this->logo = $logo;
+    }
+
+    public function setAuthor($author) {
+        $this->author = $author;
+    }
+
+    public function setAggregateRating($aggregateRating) {
+        $this->aggregateRating = $aggregateRating;
+    }
+
+    public function setAreaServed($areaServed) {
+        $this->areaServed = $areaServed;
+    }
+
+    public function setBroker($broker) {
+        $this->broker = $broker;
+    }
+
+    public function setProvider($provider) {
+        $this->provider = $provider;
+    }
+
+    public function setProviderMobility($providerMobility) {
+        $this->providerMobility = $providerMobility;
+    }
+
+    public function setIsSimilarTo($isSimilarTo) {
+        $this->isSimilarTo = $isSimilarTo;
+    }
+
+    public function setIsRelatedTo($isRelatedTo) {
+        $this->isRelatedTo = $isRelatedTo;
+    }
+    
+    public function buildSchema()
+    {
+        $schema = (object)[
+            "@context" => "https://schema.org",
+            '@type' => 'Service',
+            'url' => $this->url ?? '',
+            '@id' => $this->id ?? '',
+            'mainEntityOfPage' => $this->url ?? '',
+            'name' => $this->name ?? '',
+            'image' => $this->images ?? [],
+            'description' => $this->description ?? '',
+            "category" => $this->category,
+            "serviceType" => $this->serviceType ?? '',
+            "termsOfService" => $this->termsOfService,
+            'alternateName' => $this->keywords ?? [],
+            "logo" => $this->logo,
+            "brand" => $this->author ?? '',
+            "aggregateRating" => $this->aggregateRating,
+            "areaServed" => $this->areaServed,
+            "broker" => $this->broker ?? '',
+            "provider" => $this->provider ?? '',
+            "providerMobility" => $this->providerMobility,
+            "hoursAvailable" => $this->hoursAvailable,
+            "potentialAction" => $this->potentialAction,
+            "isSimilarTo" => $this->isSimilarTo ?? [],
+            "isRelatedTo" => $this->isRelatedTo ?? []
         ];
         return json_encode($schema);
     }
 
-    public function generateObjectImage($data)
+    public function buildObjectImage($data)
     {
-        /*
-         {
-           "@type": "ImageObject",
-           "name": "Mẫu biệt thự 5 tầng đẹp",
-           "license": "https://dev.musk.vinaweber.com/dieu-khoan-su-dung.html",
-           "acquireLicensePage": "https://dev.musk.vinaweber.com/sua-tivi-huyen-nha-be-tp-ho-chi-minh",
-           "creditText": "Musk.vn",
-           "copyrightNotice": "Musk.vn",
-           "alternativeHeadline": "Mẫu biệt thự 5 tầng đẹp",
-           "thumbnailUrl": "https://dev.musk.vinaweber.comhttps://dev.musk.vinaweber.com/images/no-image.jpg",
-           "caption": "",
-           "url": "https://dev.musk.vinaweber.comhttps://dev.musk.vinaweber.com/images/no-image.jpg",
-           "width": "",
-           "height": "",
-           "creator": {
-             "@type": "Person",
-             "@id": "https://musk.vn/le-thai-hung.html#person",
-             "image": "https://dev.musk.vinaweber.com/images/avtar.jpg",
-             "name": "CEO Lê Thái Hưng",
-             "description": "Giới thiệu nhà sáng lập của sàn TMĐT Musk.vn - Lê Thái Hưng",
-             "url": "https://musk.vn/le-thai-hung.html"
-         }
-         }
-         * */
         return (object)[
             "@type" => "ImageObject",
-            'name' => $data->imageAlt,
-            "license" => $data->termOfUse,
-            "acquireLicensePage" => $data->url,
-            "creditText" => "Musk.vn",
-            "copyrightNotice" => "Musk.vn",
-            "alternativeHeadline" => $data->imageAlt,
-            "thumbnailUrl" =>  $data->imageSrc,
-            "caption" => $data->imageCaption,
-            "url" => $data->imageSrc,
-            "width" => $data->imageWidth,
-            "height" => $data->imageHeight,
-            "creator" => $data->author
+            'name' => $data->name,
+            "license" => $data->license,
+            "acquireLicensePage" => $data->acquireLicensePage,
+            "creditText" => $data->creditText,
+            "copyrightNotice" => $data->copyrightNotice,
+            "alternativeHeadline" => $data->alternativeHeadline,
+            "thumbnailUrl" =>  $data->thumbnailUrl,
+            "caption" => $data->caption,
+            "url" => $data->url,
+            "width" => $data->width,
+            "height" => $data->height,
+            "creator" => $data->creator
         ];
     }
 
-    public function generateAuthor($data)
+    public function buildAuthor($data)
     {
-        /*
-         {
-             "@type": "Person",
-             "@id": "https://musk.vn/le-thai-hung.html#person",
-             "image": "https://dev.musk.vinaweber.com/images/avatar.jpg",
-             "name": "CEO Lê Thái Hưng",
-             "description": "Giới thiệu nhà sáng lập của sàn TMĐT Musk.vn - Lê Thái Hưng",
-             "url": "https://musk.vn/le-thai-hung.html"
-         }
-        */
-
         return [
             '@type' => 'Person',
             '@id' => $data->id,
-            'image' => $data->authorImage,
-            'name' => $data->authorName,
-            'description' => $data->authorDescription,
-            'url' => $data->authorUrl
+            'image' => $data->image,
+            'name' => $data->name,
+            'description' => $data->description,
+            'url' => $data->url
+        ];
+    }
+
+    public function buildCategory ($data) {
+        return (object)[
+            "@type"=>"Thing",
+            "name"=> $data->name ?? '',
+            "url"=> $data->url ?? '',
+            "@id"=> $data->id ?? '',
+            "mainEntityOfPage"=> $data->mainEntityOfPage ?? '',
+        ];
+    }
+
+    public function buildLogo ($data) {
+        return (object)[
+            "@type" => "ImageObject",
+            "url"=> $data->url ?? '',
+            "representativeOfPage"=> $data->representativeOfPage,
+            "name"=> $data->name ?? '',
+            "caption"=> $data->caption ?? '',
+            "width"=> $data->width ?? 0,
+            "height"=> $data->height ?? 0
+        ];
+    }
+
+    public function buildAggregateRating ($data) {
+        return (object)[
+            "@type" =>  "AggregateRating",
+            "itemReviewed" => (object)[
+                "@type" => "CreativeWorkSeries",
+                "name" => $data->name ?? '',
+                "description" => $data->description ?? '',
+                "url" => $data->url ?? '',
+                "mainEntityofPage" => $data->mainEntityofPage ?? ''
+            ],
+            "ratingValue" => $data->ratingValue ?? '',
+            "bestRating" => $data->bestRating ?? '',
+            "ratingCount" => $data->ratingCount ?? ''
+        ];
+    }
+
+    public function buildAreaServed ($data) {
+        return (object)[
+            "@type" => "Place",
+            "address" =>  (object)[
+                "@type" =>  "PostalAddress",
+                "addressLocality" => $data->addressLocality ?? '',
+                "addressRegion" => $data->addressRegion ?? '',
+                "postalCode" => $data->postalCode ?? '',
+                "streetAddress" => $data->streetAddress ?? ''
+            ]
+        ];
+    }
+
+    public function buildIsSimilarTo ($data) {
+        return (object)[
+            "@type" => "Thing",
+            "name" => $data->name,
+            "description" => $data->description,
+            "mainEntityOfPage" => $data->mainEntityOfPage,
+            "url" => $data->url
+        ];
+    }
+
+    public function buildIsRelatedTo ($data) {
+        return (object)[
+            "@type" => "Thing",
+            "name" => $data->name,
+            "description" => $data->description,
+            "mainEntityOfPage" => $data->mainEntityOfPage,
+            "url" => $data->url
         ];
     }
 }
