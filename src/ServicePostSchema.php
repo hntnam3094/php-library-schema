@@ -24,76 +24,8 @@ class ServicePostSchema implements Schema
     private $isRelatedTo = [];
     private $hoursAvailable = [];
     private $potentialAction = [];
-    private $defaulthoursAvailable = [];
-    private $defaultpotentialAction = [];
 
     public function __construct($data = null) {
-        $this->defaulthoursAvailable = [
-            (object)[
-                "@type" => "OpeningHoursSpecification",
-                "dayOfWeek" => "http://schema.org/Monday",
-                "opens" => "8:00",
-                "closes" => "18:00"
-            ],
-            (object)[
-                "@type" => "OpeningHoursSpecification",
-                "dayOfWeek" => "http://schema.org/Tuesday",
-                "opens" => "8:00",
-                "closes" => "18:00"
-            ],
-            (object)[
-                "@type" => "OpeningHoursSpecification",
-                "dayOfWeek" => "http://schema.org/Wednesday",
-                "opens" => "8:00",
-                "closes" => "18:00"
-            ],
-            (object)[
-                "@type" => "OpeningHoursSpecification",
-                "dayOfWeek" => "http://schema.org/Thursday",
-                "opens" => "8:00",
-                "closes" => "18:00"
-            ],
-            (object)[
-                "@type" => "OpeningHoursSpecification",
-                "dayOfWeek" => "http://schema.org/Friday",
-                "opens" => "8:00",
-                "closes" => "18:00"
-            ],
-            (object)[
-                "@type" => "OpeningHoursSpecification",
-                "dayOfWeek" => "http://schema.org/Saturday",
-                "opens" => "8:00",
-                "closes" => "18:00"
-            ]
-        ];
-
-        $this->defaultpotentialAction = [
-            (object)[
-                "@type" => "SearchAction",
-                "instrument" => ["laptop","pc","tablet","phone"]
-            ],
-            (object)[
-                "@type" => "ViewAction",
-                "instrument" => ["laptop","pc","tablet","phone"]
-            ],
-            (object)[
-                "@type" => "BuyAction",
-                "instrument" => ["laptop","pc","tablet","phone"]
-            ],
-            (object)[
-                "@type" => "AskAction",
-                "instrument" => ["laptop","pc","tablet","phone"]
-            ],
-            (object)[
-                "@type" => "InteractAction",
-                "instrument" => ["laptop","pc","tablet","phone"],
-                "target" => (object)[
-                    "@type" => "EntryPoint",
-                    "actionPlatform" => "https://schema.org/DigitalPlatformEnumeration"
-                ]
-            ]
-        ];
-
         $this->url = $data->url ?? '';
         $this->id = $data->id ?? '';
         $this->name = $data->name ?? '';
@@ -112,8 +44,8 @@ class ServicePostSchema implements Schema
         $this->providerMobility = $data->providerMobility ?? null;
         $this->isSimilarTo = $data->isSimilarTo ?? [];
         $this->isRelatedTo = $data->isRelatedTo ?? [];
-        $this->hoursAvailable = $data->hoursAvailable ?? $this->defaulthoursAvailable;
-        $this->potentialAction = $data->potentialAction ?? $this->defaultpotentialAction;
+        $this->hoursAvailable = $data->hoursAvailable ?? [];
+        $this->potentialAction = $data->potentialAction ?? [];
     }
 
     public function setUrl($url) {
@@ -189,11 +121,11 @@ class ServicePostSchema implements Schema
     }
 
     public function sethoursAvailable($hoursAvailable = null) {
-        $this->hoursAvailable = $hoursAvailable ?? $this->defaulthoursAvailable;
+        $this->hoursAvailable = $hoursAvailable ?? [];
     }
 
     public function setpotentialAction($potentialAction = null) {
-        $this->potentialAction = $potentialAction ?? $this->defaultpotentialAction;
+        $this->potentialAction = $potentialAction ?? [];
     }
     
     public function buildSchema()
@@ -205,126 +137,204 @@ class ServicePostSchema implements Schema
             '@id' => $this->id ?? '',
             'mainEntityOfPage' => $this->url ?? '',
             'name' => $this->name ?? '',
-            'image' => $this->image ?? [],
+            'image' => $this->buildDataImage($this->image ?? []),
             'description' => $this->description ?? '',
-            "category" => $this->category,
+            "category" => $this->buildCategory($this->category ?? null),
             "serviceType" => $this->serviceType ?? '',
             "termsOfService" => $this->termsOfService,
             'alternateName' => $this->alternateName ?? '',
-            "logo" => $this->logo,
-            "brand" => $this->brand ?? '',
-            "aggregateRating" => $this->aggregateRating ?? (object)[],
-            "areaServed" => $this->areaServed ?? (object)[],
-            "broker" => $this->broker ?? '',
-            "provider" => $this->provider ?? '',
+            "logo" => $this->buildLogo($this->logo ?? null),
+            "brand" => $this->buildAuthor($this->brand ?? null),
+            "aggregateRating" => $this->buildAggregateRating($this->aggregateRating ?? null),
+            "areaServed" => $this->buildAreaServed($this->areaServed ?? null),
+            "broker" => $this->buildAuthor($this->broker ?? null),
+            "provider" => $this->buildAuthor($this->provider ?? null),
             "providerMobility" => $this->providerMobility ?? '',
-            "hoursAvailable" => $this->hoursAvailable ?? [],
-            "potentialAction" => $this->potentialAction ?? [],
-            "isSimilarTo" => $this->isSimilarTo ?? [],
-            "isRelatedTo" => $this->isRelatedTo ?? []
+            "hoursAvailable" => $this->buildDataHoursAvailable($this->hoursAvailable ?? []),
+            "potentialAction" => $this->buildDataPotentialAction($this->potentialAction ?? []),
+            "isSimilarTo" => $this->buildDataSimilar($this->isSimilarTo ?? []),
+            "isRelatedTo" => $this->buildDataRelated($this->isRelatedTo ?? [])
         ];
         return json_encode($schema);
     }
 
-    public function buildObjectImage($data = null)
-    {
+    function buildDataPotentialAction ($array = []) {
+        $listAction = [];
+        if ($array) {
+            foreach ($array as $item) {
+                $listAction[] = $this->buildAction($item ?? null);
+            }
+        }
+        return $listAction;
+    }
+
+    function buildAction ($data = null) {
+         $action = (object)[
+            "@type" => $data['type'] ?? '',
+            "instrument" => $data['instrument'] ?? []
+        ];
+         if (isset($data['target'])) {
+             $action->target = $this->buildActionTarget($data['target'] ?? null);
+         }
+        return $action;
+    }
+
+    function buildActionTarget ($data = null) {
+
         return (object)[
-            "@type" => "ImageObject",
-            'name' => $data->name,
-            "license" => $data->license,
-            "acquireLicensePage" => $data->acquireLicensePage,
-            "creditText" => $data->creditText,
-            "copyrightNotice" => $data->copyrightNotice,
-            "alternativeHeadline" => $data->alternativeHeadline,
-            "thumbnailUrl" =>  $data->thumbnailUrl,
-            "caption" => $data->caption,
-            "url" => $data->url,
-            "width" => $data->width,
-            "height" => $data->height,
-            "creator" => $data->creator
+            "@type" => $data['type'] ?? '',
+            "actionPlatform" => $data['actionPlatform'] ?? ''
         ];
     }
 
-    public function buildAuthor($data = null)
+    function buildDataHoursAvailable ($array = []) {
+        $listHours = [];
+        if ($array) {
+            foreach ($array as $item) {
+                $listHours[] = $this->buildHoursAvailable($item ?? null);
+            }
+        }
+        return $listHours;
+    }
+
+    function buildHoursAvailable ($data = null) {
+        return (object)[
+            "@type" => "OpeningHoursSpecification",
+            "dayOfWeek" => $data['dayOfWeek'] ?? '',
+            "opens" => $data['opens'] ?? '',
+            "closes" => $data['closes'] ?? ''
+        ];
+    }
+
+    function buildDataSimilar ($array = []) {
+        $listImage = [];
+        if ($array) {
+            foreach ($array as $item) {
+                $listImage[] = $this->buildIsSimilarTo($item ?? null);
+            }
+        }
+        return $listImage;
+    }
+
+    function buildDataRelated ($array = []) {
+        $listImage = [];
+        if ($array) {
+            foreach ($array as $item) {
+                $listImage[] = $this->buildIsRelatedTo($item ?? null);
+            }
+        }
+        return $listImage;
+    }
+
+    function buildDataImage ($array = []) {
+        $listImage = [];
+        if ($array) {
+            foreach ($array as $item) {
+                $listImage[] = $this->buildObjectImage($item ?? null);
+            }
+        }
+        return $listImage;
+    }
+
+    function buildObjectImage($data = null)
+    {
+        return (object)[
+            "@type" => "ImageObject",
+            'name' => $data['name'] ?? '',
+            "license" => $data['license'],
+            "acquireLicensePage" => $data['acquireLicensePage'] ?? '',
+            "creditText" => $data['creditText'] ?? '',
+            "copyrightNotice" => $data['copyrightNotice'] ?? '',
+            "alternativeHeadline" => $data['alternativeHeadline'] ?? '',
+            "thumbnailUrl" =>  $data['thumbnailUrl'] ?? '',
+            "caption" => $data['caption'] ?? '',
+            "url" => $data['url'] ?? '',
+            "width" => $data['width'] ?? '',
+            "height" => $data['height'] ?? '',
+            "creator" => $this->buildAuthor($data['creator'] ?? null)
+        ];
+    }
+
+    function buildAuthor($data = null)
     {
         return [
             '@type' => 'Person',
-            '@id' => $data->id,
-            'image' => $data->image,
-            'name' => $data->name,
-            'description' => $data->description,
-            'url' => $data->url
+            '@id' => $data['id'] ?? '',
+            'image' => $data['image'] ?? '',
+            'name' => $data['name'] ?? '',
+            'description' => $data['description'] ?? '',
+            'url' => $data['url'] ?? ''
         ];
     }
 
-    public function buildCategory ($data = null) {
+    function buildCategory ($data = null) {
         return (object)[
             "@type"=>"Thing",
-            "name"=> $data->name ?? '',
-            "url"=> $data->url ?? '',
-            "@id"=> $data->id ?? '',
-            "mainEntityOfPage"=> $data->mainEntityOfPage ?? '',
+            "name"=> $data['name'] ?? '',
+            "url"=> $data['url'] ?? '',
+            "@id"=> $data['id'] ?? '',
+            "mainEntityOfPage"=> $data['mainEntityOfPage'] ?? '',
         ];
     }
 
-    public function buildLogo ($data = null) {
+    function buildLogo ($data = null) {
         return (object)[
             "@type" => "ImageObject",
-            "url"=> $data->url ?? '',
-            "representativeOfPage"=> $data->representativeOfPage,
-            "name"=> $data->name ?? '',
-            "caption"=> $data->caption ?? '',
-            "width"=> $data->width ?? 0,
-            "height"=> $data->height ?? 0
+            "url"=> $data['url'] ?? '',
+            "representativeOfPage"=> $data['representativeOfPage'] ?? '',
+            "name"=> $data['name'] ?? '',
+            "caption"=> $data['caption'] ?? '',
+            "width"=> $data['width'] ?? 0,
+            "height"=> $data['height'] ?? 0
         ];
     }
 
-    public function buildAggregateRating ($data = null) {
+    function buildAggregateRating ($data = null) {
         return (object)[
             "@type" =>  "AggregateRating",
             "itemReviewed" => (object)[
                 "@type" => "CreativeWorkSeries",
-                "name" => $data->name ?? '',
-                "description" => $data->description ?? '',
-                "url" => $data->url ?? '',
-                "mainEntityofPage" => $data->mainEntityofPage ?? ''
+                "name" => $data['name'] ?? '',
+                "description" => $data['description'] ?? '',
+                "url" => $data['url'] ?? '',
+                "mainEntityofPage" => $data['mainEntityofPage'] ?? ''
             ],
-            "ratingValue" => $data->ratingValue ?? '',
-            "bestRating" => $data->bestRating ?? '',
-            "ratingCount" => $data->ratingCount ?? ''
+            "ratingValue" => $data['ratingValue'] ?? '',
+            "bestRating" => $data['bestRating'] ?? '',
+            "ratingCount" => $data['ratingCount'] ?? ''
         ];
     }
 
-    public function buildAreaServed ($data = null) {
+    function buildAreaServed ($data = null) {
         return (object)[
             "@type" => "Place",
             "address" =>  (object)[
                 "@type" =>  "PostalAddress",
-                "addressLocality" => $data->addressLocality ?? '',
-                "addressRegion" => $data->addressRegion ?? '',
-                "postalCode" => $data->postalCode ?? '',
-                "streetAddress" => $data->streetAddress ?? ''
+                "addressLocality" => $data['addressLocality'] ?? '',
+                "addressRegion" => $data['addressRegion'] ?? '',
+                "postalCode" => $data['postalCode'] ?? '',
+                "streetAddress" => $data['streetAddress'] ?? ''
             ]
         ];
     }
 
-    public function buildIsSimilarTo ($data = null) {
+    function buildIsSimilarTo ($data = null) {
         return (object)[
             "@type" => "Thing",
-            "name" => $data->name,
-            "description" => $data->description,
-            "mainEntityOfPage" => $data->mainEntityOfPage,
-            "url" => $data->url
+            "name" => $data['name'] ?? '',
+            "description" => $data['description'] ?? '',
+            "mainEntityOfPage" => $data['mainEntityOfPage'] ?? '',
+            "url" => $data['url'] ?? ''
         ];
     }
 
-    public function buildIsRelatedTo ($data = null) {
+    function buildIsRelatedTo ($data = null) {
         return (object)[
             "@type" => "Thing",
-            "name" => $data->name,
-            "description" => $data->description,
-            "mainEntityOfPage" => $data->mainEntityOfPage,
-            "url" => $data->url
+            "name" => $data['name'] ?? '',
+            "description" => $data['description'] ?? '',
+            "mainEntityOfPage" => $data['mainEntityOfPage'] ?? '',
+            "url" => $data['url'] ?? ''
         ];
     }
 }

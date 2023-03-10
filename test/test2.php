@@ -5,7 +5,7 @@ require_once '../vendor/autoload.php';
 use Vinaweber\SEOSchema\ServicePostSchema;
 $lib = new ServicePostSchema();
 
-$author = (object)[
+$author = [
     'id' => "https://musk.vn/le-thai-hung.html#person",
     'image' => "https://dev.musk.vinaweber.com/images/avtar.jpg",
     'name' => "CEO Lê Thái Hưng",
@@ -13,29 +13,31 @@ $author = (object)[
     'url' => "https://musk.vn/le-thai-hung.html",
 ];
 
-$image = (object)[
-    'name' => "/img2.jpg",
-    "license" => "http://localhost/dieu-khoan-su-dung.html",
-    "acquireLicensePage" => "http://localhost/final-test-huyen-an-phu-an-giang",
-    "creditText" => "Musk.vn",
-    "copyrightNotice" => "Musk.vn",
-    "alternativeHeadline" => "/img2.jpg",
-    "thumbnailUrl" =>  "http://localhosthttp://localhost/uploads/files/img2.jpg",
-    "caption" => "123",
-    "url" => "http://localhosthttp://localhost/uploads/files/img2.jpg",
-    "width" => 200,
-    "height" => 500,
-    "creator" => $lib->buildAuthor($author)
+$image = [
+    [
+        'name' => "/img2.jpg",
+        "license" => "http://localhost/dieu-khoan-su-dung.html",
+        "acquireLicensePage" => "http://localhost/final-test-huyen-an-phu-an-giang",
+        "creditText" => "Musk.vn",
+        "copyrightNotice" => "Musk.vn",
+        "alternativeHeadline" => "/img2.jpg",
+        "thumbnailUrl" =>  "http://localhosthttp://localhost/uploads/files/img2.jpg",
+        "caption" => "123",
+        "url" => "http://localhosthttp://localhost/uploads/files/img2.jpg",
+        "width" => 200,
+        "height" => 500,
+        "creator" => $author
+    ]
 ];
 
-$category = (object)[
+$category = [
     "name"=> "final test",
     "url"=> "http://localhost/final-test-huyen-an-phu-an-giang",
-    "@id"=> "http://localhost/final-test-huyen-an-phu-an-giang#category",
+    "id"=> "http://localhost/final-test-huyen-an-phu-an-giang#category",
     "mainEntityOfPage"=> "http://localhost/final-test-huyen-an-phu-an-giang"
 ];
 
-$logo = (object)[
+$logo = [
     "url"=> "http://localhost/img2.jpg",
     "representativeOfPage"=> "true",
     "name"=>  "final test",
@@ -44,7 +46,7 @@ $logo = (object)[
     "height"=> 1600
 ];
 
-$aggre = (object)[
+$aggre = [
     "name" => "final test",
     "description" => "final test",
     "url" => "http://localhost/final-test-huyen-an-phu-an-giang",
@@ -54,74 +56,64 @@ $aggre = (object)[
     "ratingCount" => "20"
 ];
 
-$areaServed = (object)[
+$areaServed = [
     "addressLocality" => 123,
     "addressRegion" => 345,
     "postalCode" => 678,
     "streetAddress" => 123132321
 ];
 
-$realtedTo = (object)[
-    "name" => 'RelatedTo',
-    "description" => 'RelatedTo',
-    "mainEntityOfPage" => "http://localhost./thu-mua-ban-ghe",
-    "url" => "http://localhost/thu-mua-ban-ghe"
+$realted = [
+    [
+        "name" => 'RelatedTo12',
+        "description" => 'RelatedTo343',
+        "mainEntityOfPage" => "http://localhost./thu-mua-ban-ghe",
+        "url" => "http://localhost/thu-mua-ban-ghe"
+    ]
 ];
 
-$similar = (object)[
-    "name" => 'Similar',
-    "description" => 'Similar',
-    "mainEntityOfPage" => "http://localhost./thu-mua-ban-ghe",
-    "url" => "http://localhost/thu-mua-ban-ghe"
+$similar = [
+    [
+        "name" => 'Similar5643',
+        "description" => 'Similar32131',
+        "mainEntityOfPage" => "http://localhost./thu-mua-ban-ghe",
+        "url" => "http://localhost/thu-mua-ban-ghe"
+    ]
 ];
 
-
-$dataImage = [$lib->buildObjectImage($image)];
-$dataAuthor = $lib->buildAuthor($author);
-$dataCategory = $lib->buildCategory($category);
 $dataTermsOfService = [
     "http://localhost/chinh-sach-bao-mat-thong-tin.html",
     "http://localhost/dieu-khoan-su-dung.html"
 ];
-$dataLogo = $lib->buildLogo($logo);
-$dataAggregateRating = $lib->buildAggregateRating($aggre);
-$dataAreaServed = $lib->buildAreaServed($areaServed);
-$dataRelatedTo = [$lib->buildIsRelatedTo($realtedTo)];
-$dataSimilar = [$lib->buildIsSimilarTo($similar)];
+
 
 $dataHoursAvailable = [
-    (object)[
-        "@type" => "OpeningHoursSpecification",
+   [
         "dayOfWeek" => "http://schema.org/Monday",
         "opens" => "8:00",
         "closes" => "18:00"
     ],
-    (object)[
-        "@type" => "OpeningHoursSpecification",
+    [
         "dayOfWeek" => "http://schema.org/Tuesday",
         "opens" => "8:00",
         "closes" => "18:00"
     ],
-    (object)[
-        "@type" => "OpeningHoursSpecification",
+    [
         "dayOfWeek" => "http://schema.org/Wednesday",
         "opens" => "8:00",
         "closes" => "18:00"
     ],
-    (object)[
-        "@type" => "OpeningHoursSpecification",
+    [
         "dayOfWeek" => "http://schema.org/Thursday",
         "opens" => "8:00",
         "closes" => "18:00"
     ],
-    (object)[
-        "@type" => "OpeningHoursSpecification",
+    [
         "dayOfWeek" => "http://schema.org/Friday",
         "opens" => "8:00",
         "closes" => "18:00"
     ],
-    (object)[
-        "@type" => "OpeningHoursSpecification",
+    [
         "dayOfWeek" => "http://schema.org/Saturday",
         "opens" => "8:00",
         "closes" => "18:00"
@@ -129,27 +121,27 @@ $dataHoursAvailable = [
 ];
 
 $dataPotentialAction = [
-    (object)[
-        "@type" => "SearchAction",
+    [
+        "type" => "SearchAction",
         "instrument" => ["laptop","pc","tablet","phone"]
     ],
-    (object)[
-        "@type" => "ViewAction",
+    [
+        "type" => "ViewAction",
         "instrument" => ["laptop","pc","tablet","phone"]
     ],
-    (object)[
-        "@type" => "BuyAction",
+    [
+        "type" => "BuyAction",
         "instrument" => ["laptop","pc","tablet","phone"]
     ],
-    (object)[
-        "@type" => "AskAction",
+    [
+        "type" => "AskAction",
         "instrument" => ["laptop","pc","tablet","phone"]
     ],
-    (object)[
-        "@type" => "InteractAction",
+    [
+        "type" => "InteractAction",
         "instrument" => ["laptop","pc","tablet","phone"],
-        "target" => (object)[
-            "@type" => "EntryPoint",
+        "target" => [
+            "type" => "EntryPoint",
             "actionPlatform" => "https://schema.org/DigitalPlatformEnumeration"
         ]
     ]
@@ -159,22 +151,22 @@ $dataPotentialAction = [
 $lib->setUrl("http://localhost/final-test-huyen-an-phu-an-giang");
 $lib->setId("http://localhost/final-test-huyen-an-phu-an-giang#service");
 $lib->setName("final test");
-$lib->setImage($dataImage);
+$lib->setImage($image);
 $lib->setDescription("final test");
-$lib->setCategory($dataCategory);
+$lib->setCategory($category);
 $lib->setServiceType("123 123 123 123 123");
 $lib->setTermsOfService($dataTermsOfService);
 $lib->setAlternateName(["cho", " meo", " ga", " vit", " voi", " ho", " ran", " su tu", " ha ma"]);
-$lib->setLogo($dataLogo);
-$lib->setBrand($dataAuthor);
-$lib->setAggregateRating($dataAggregateRating);
-$lib->setAreaServed($dataAreaServed);
-$lib->setBroker($dataAuthor);
-$lib->setProvider($dataAuthor);
+$lib->setLogo($logo);
+$lib->setBrand($author);
+$lib->setAggregateRating($aggre);
+$lib->setAreaServed($areaServed);
+$lib->setBroker($author);
+$lib->setProvider($author);
 $lib->setProviderMobility("dynamic");
-$lib->setIsSimilarTo($dataRelatedTo);
-$lib->setIsRelatedTo($dataSimilar);
-$lib->sethoursAvailable();
-$lib->setpotentialAction();
+$lib->setIsSimilarTo($similar);
+$lib->setIsRelatedTo($realted);
+$lib->sethoursAvailable($dataHoursAvailable);
+$lib->setpotentialAction($dataPotentialAction);
 
 echo $lib->buildSchema();
