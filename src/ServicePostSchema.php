@@ -158,7 +158,7 @@ class ServicePostSchema implements Schema
         return json_encode($schema);
     }
 
-    function buildDataPotentialAction ($array = []) {
+    private function buildDataPotentialAction ($array = []) {
         $listAction = [];
         if ($array) {
             foreach ($array as $item) {
@@ -168,7 +168,7 @@ class ServicePostSchema implements Schema
         return $listAction;
     }
 
-    function buildAction ($data = null) {
+    private function buildAction ($data = null) {
          $action = (object)[
             "@type" => $data['type'] ?? '',
             "instrument" => $data['instrument'] ?? []
@@ -179,7 +179,7 @@ class ServicePostSchema implements Schema
         return $action;
     }
 
-    function buildActionTarget ($data = null) {
+    private function buildActionTarget ($data = null) {
 
         return (object)[
             "@type" => $data['type'] ?? '',
@@ -187,7 +187,7 @@ class ServicePostSchema implements Schema
         ];
     }
 
-    function buildDataHoursAvailable ($array = []) {
+    private function buildDataHoursAvailable ($array = []) {
         $listHours = [];
         if ($array) {
             foreach ($array as $item) {
@@ -197,7 +197,7 @@ class ServicePostSchema implements Schema
         return $listHours;
     }
 
-    function buildHoursAvailable ($data = null) {
+    private function buildHoursAvailable ($data = null) {
         return (object)[
             "@type" => "OpeningHoursSpecification",
             "dayOfWeek" => $data['dayOfWeek'] ?? '',
@@ -206,7 +206,7 @@ class ServicePostSchema implements Schema
         ];
     }
 
-    function buildDataSimilar ($array = []) {
+    private function buildDataSimilar ($array = []) {
         $listImage = [];
         if ($array) {
             foreach ($array as $item) {
@@ -216,7 +216,7 @@ class ServicePostSchema implements Schema
         return $listImage;
     }
 
-    function buildDataRelated ($array = []) {
+    private function buildDataRelated ($array = []) {
         $listImage = [];
         if ($array) {
             foreach ($array as $item) {
@@ -226,7 +226,7 @@ class ServicePostSchema implements Schema
         return $listImage;
     }
 
-    function buildDataImage ($array = []) {
+    private function buildDataImage ($array = []) {
         $listImage = [];
         if ($array) {
             foreach ($array as $item) {
@@ -236,7 +236,7 @@ class ServicePostSchema implements Schema
         return $listImage;
     }
 
-    function buildObjectImage($data = null)
+    private function buildObjectImage($data = null)
     {
         return (object)[
             "@type" => "ImageObject",
@@ -255,7 +255,7 @@ class ServicePostSchema implements Schema
         ];
     }
 
-    function buildAuthor($data = null)
+    private function buildAuthor($data = null)
     {
         return [
             '@type' => 'Person',
@@ -267,7 +267,7 @@ class ServicePostSchema implements Schema
         ];
     }
 
-    function buildCategory ($data = null) {
+    private function buildCategory ($data = null) {
         return (object)[
             "@type"=>"Thing",
             "name"=> $data['name'] ?? '',
@@ -277,7 +277,7 @@ class ServicePostSchema implements Schema
         ];
     }
 
-    function buildLogo ($data = null) {
+    private function buildLogo ($data = null) {
         return (object)[
             "@type" => "ImageObject",
             "url"=> $data['url'] ?? '',
@@ -289,7 +289,7 @@ class ServicePostSchema implements Schema
         ];
     }
 
-    function buildAggregateRating ($data = null) {
+    private function buildAggregateRating ($data = null) {
         return (object)[
             "@type" =>  "AggregateRating",
             "itemReviewed" => (object)[
@@ -305,7 +305,7 @@ class ServicePostSchema implements Schema
         ];
     }
 
-    function buildAreaServed ($data = null) {
+    private function buildAreaServed ($data = null) {
         return (object)[
             "@type" => "Place",
             "address" =>  (object)[
@@ -318,7 +318,7 @@ class ServicePostSchema implements Schema
         ];
     }
 
-    function buildIsSimilarTo ($data = null) {
+    private function buildIsSimilarTo ($data = null) {
         return (object)[
             "@type" => "Thing",
             "name" => $data['name'] ?? '',
@@ -328,7 +328,7 @@ class ServicePostSchema implements Schema
         ];
     }
 
-    function buildIsRelatedTo ($data = null) {
+    private function buildIsRelatedTo ($data = null) {
         return (object)[
             "@type" => "Thing",
             "name" => $data['name'] ?? '',

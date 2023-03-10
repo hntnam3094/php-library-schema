@@ -39,10 +39,10 @@ class BlogPostingSchema implements Schema
         $this->articleBody = $data->articleBody ?? '';
         $this->mentions = $data->mentions ?? [];
         $this->image = $data->image ?? [];
-        $this->creator = $data->creator ?? (object)[];
-        $this->publisher = $data->publisher ?? (object)[];
-        $this->author = $data->author ?? (object)[];
-        $this->copyrightHolder = $data->copyrightHolder ?? (object)[];
+        $this->creator = $data->creator ?? [];
+        $this->publisher = $data->publisher ?? [];
+        $this->author = $data->author ?? [];
+        $this->copyrightHolder = $data->copyrightHolder ?? [];
         $this->datePublished = $data->datePublished ?? '';
         $this->dateModified = $data->dateModified ?? '';
         $this->wordCount = $data->wordCount ?? 0;
@@ -176,10 +176,10 @@ class BlogPostingSchema implements Schema
             'articleBody' => $this->articleBody,
             'mentions' => $this->buildDataMentions($this->mentions),
             'image' => $this->buildDataImage($this->image),
-            'creator' => $this->buildAuthor($this->creator),
-            'publisher' => $this->buildAuthor($this->publisher),
-            'author' => $this->buildAuthor($this->author),
-            'copyrightHolder' => $this->buildAuthor($this->copyrightHolder),
+            'creator' => $this->buildAuthor($this->creator ?? null),
+            'publisher' => $this->buildAuthor($this->publisher ?? null),
+            'author' => $this->buildAuthor($this->author ?? null),
+            'copyrightHolder' => $this->buildAuthor($this->copyrightHolder ?? null),
             'datePublished' => $this->datePublished,
             'dateModified' => $this->dateModified,
             'wordCount' => $this->wordCount,
@@ -187,42 +187,42 @@ class BlogPostingSchema implements Schema
         return json_encode($schema);
     }
 
-    function buildDataImage ($array = []) {
+    private function buildDataImage ($array = []) {
         $listImage = [];
         if ($array) {
             foreach ($array as $item) {
-                $listImage[] = $this->buildObjectImage((object)$item);
+                $listImage[] = $this->buildObjectImage($item ?? null);
             }
         }
         return $listImage;
     }
 
-    function buildDataMentions($array = []) {
+    private function buildDataMentions($array = []) {
         $listMentions = [];
         if ($array) {
             foreach ($array as $item) {
-                $listMentions[] = $this->buildMentions((object)$item);
+                $listMentions[] = $this->buildMentions($item ?? null);
             }
         }
         return $listMentions;
     }
-    function buildObjectImage($data = null)
+    private function buildObjectImage($data = null)
     {
         return (object)[
             "@type" => "ImageObject",
-            "license" => $data->license ?? '',
-            "acquireLicensePage" => $data->acquireLicensePage ?? '',
-            "creditText" => $data->creditText ?? '',
-            "copyrightNotice" => $data->copyrightNotice ?? '',
-            "caption" => $data->caption ?? '',
-            "url" => $data->url ?? '',
-            "width" => $data->width ?? 0,
-            "height" => $data->height ?? 0,
-            "creator" => $this->buildAuthor($data->creator) ?? ''
+            "license" => $data['license'] ?? '',
+            "acquireLicensePage" => $data['acquireLicensePage'] ?? '',
+            "creditText" => $data['creditText'] ?? '',
+            "copyrightNotice" => $data['copyrightNotice'] ?? '',
+            "caption" => $data['caption'] ?? '',
+            "url" => $data['url'] ?? '',
+            "width" => $data['width'] ?? 0,
+            "height" => $data['height'] ?? 0,
+            "creator" => $this->buildAuthor($data['creator'] ?? null)
         ];
     }
 
-    function buildAuthor($data = null)
+    private function buildAuthor($data = null)
     {
         return [
             '@type' => 'Person',
@@ -234,13 +234,13 @@ class BlogPostingSchema implements Schema
         ];
     }
 
-    function buildMentions($data = null)
+    private function buildMentions($data = null)
     {
         return (object)[
             "@type" => "Thing",
-            "url" => $data->url ?? '',
-            "mainEntityOfPage" => $data->mainEntityOfPage ?? '',
-            "name" => $data->name ?? ''
+            "url" => $data['url'] ?? '',
+            "mainEntityOfPage" => $data['mainEntityOfPage'] ?? '',
+            "name" => $data['name'] ?? ''
         ];
     }
 }
