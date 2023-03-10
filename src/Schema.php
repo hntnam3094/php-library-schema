@@ -5,7 +5,7 @@ interface Schema
 {
     public function buildSchema();
 
-    public function buildObjectImage($data);
+    function buildObjectImage($data);
 
-    public function buildAuthor($data);
+    function buildAuthor($data);
 }

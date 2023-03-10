@@ -174,12 +174,12 @@ class BlogPostingSchema implements Schema
             'articleSection' => $this->articleSection,
             'name' => $this->name,
             'articleBody' => $this->articleBody,
-            'mentions' => $this->mentions,
-            'image' => $this->image,
-            'creator' => $this->creator,
-            'publisher' => $this->publisher,
-            'author' => $this->author,
-            'copyrightHolder' => $this->copyrightHolder,
+            'mentions' => $this->buildDataMentions($this->mentions),
+            'image' => $this->buildDataImage($this->image),
+            'creator' => $this->buildAuthor($this->creator),
+            'publisher' => $this->buildAuthor($this->publisher),
+            'author' => $this->buildAuthor($this->author),
+            'copyrightHolder' => $this->buildAuthor($this->copyrightHolder),
             'datePublished' => $this->datePublished,
             'dateModified' => $this->dateModified,
             'wordCount' => $this->wordCount,
@@ -187,41 +187,60 @@ class BlogPostingSchema implements Schema
         return json_encode($schema);
     }
 
-    public function buildObjectImage($data = null)
+    function buildDataImage ($array = []) {
+        $listImage = [];
+        if ($array) {
+            foreach ($array as $item) {
+                $listImage[] = $this->buildObjectImage((object)$item);
+            }
+        }
+        return $listImage;
+    }
+
+    function buildDataMentions($array = []) {
+        $listMentions = [];
+        if ($array) {
+            foreach ($array as $item) {
+                $listMentions[] = $this->buildMentions((object)$item);
+            }
+        }
+        return $listMentions;
+    }
+    function buildObjectImage($data = null)
     {
         return (object)[
             "@type" => "ImageObject",
-            "license" => $data->license,
-            "acquireLicensePage" => $data->acquireLicensePage,
-            "creditText" => $data->creditText,
-            "copyrightNotice" => $data->copyrightNotice,
-            "caption" => $data->caption,
-            "url" => $data->url,
-            "width" => $data->width,
-            "height" => $data->height,
-            "creator" => $data->creator
+            "license" => $data->license ?? '',
+            "acquireLicensePage" => $data->acquireLicensePage ?? '',
+            "creditText" => $data->creditText ?? '',
+            "copyrightNotice" => $data->copyrightNotice ?? '',
+            "caption" => $data->caption ?? '',
+            "url" => $data->url ?? '',
+            "width" => $data->width ?? 0,
+            "height" => $data->height ?? 0,
+            "creator" => $this->buildAuthor($data->creator) ?? ''
         ];
     }
 
-    public function buildAuthor($data = null)
+    function buildAuthor($data = null)
     {
         return [
             '@type' => 'Person',
-            '@id' => $data->id,
-            'image' => $data->image,
-            'name' => $data->name,
-            'description' => $data->description,
-            'url' => $data->url
+            '@id' => $data['id'] ?? '',
+            'image' => $data['image'] ?? '',
+            'name' => $data['name'] ?? '',
+            'description' => $data['description'] ?? '',
+            'url' => $data['url'] ?? ''
         ];
     }
 
-    public function buildMentions($data = null)
+    function buildMentions($data = null)
     {
         return (object)[
             "@type" => "Thing",
-            "url" => $data->url,
-            "mainEntityOfPage" => $data->mainEntityOfPage,
-            "name" => $data->name
+            "url" => $data->url ?? '',
+            "mainEntityOfPage" => $data->mainEntityOfPage ?? '',
+            "name" => $data->name ?? ''
         ];
     }
 }
