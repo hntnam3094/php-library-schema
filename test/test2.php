@@ -88,32 +88,38 @@ $dataTermsOfService = [
 
 
 $dataHoursAvailable = [
-   [
+    (object)[
+       "@type" => "OpeningHoursSpecification",
         "dayOfWeek" => "http://schema.org/Monday",
         "opens" => "8:00",
         "closes" => "18:00"
     ],
-    [
+    (object)[
+        "@type" => "OpeningHoursSpecification",
         "dayOfWeek" => "http://schema.org/Tuesday",
         "opens" => "8:00",
         "closes" => "18:00"
     ],
-    [
+    (object)[
+        "@type" => "OpeningHoursSpecification",
         "dayOfWeek" => "http://schema.org/Wednesday",
         "opens" => "8:00",
         "closes" => "18:00"
     ],
-    [
+    (object)[
+        "@type" => "OpeningHoursSpecification",
         "dayOfWeek" => "http://schema.org/Thursday",
         "opens" => "8:00",
         "closes" => "18:00"
     ],
-    [
+    (object)[
+        "@type" => "OpeningHoursSpecification",
         "dayOfWeek" => "http://schema.org/Friday",
         "opens" => "8:00",
         "closes" => "18:00"
     ],
-    [
+    (object)[
+        "@type" => "OpeningHoursSpecification",
         "dayOfWeek" => "http://schema.org/Saturday",
         "opens" => "8:00",
         "closes" => "18:00"
@@ -121,27 +127,27 @@ $dataHoursAvailable = [
 ];
 
 $dataPotentialAction = [
-    [
-        "type" => "SearchAction",
+    (object)[
+        "@type" => "SearchAction",
         "instrument" => ["laptop","pc","tablet","phone"]
     ],
-    [
-        "type" => "ViewAction",
+    (object)[
+        "@type" => "ViewAction",
         "instrument" => ["laptop","pc","tablet","phone"]
     ],
-    [
-        "type" => "BuyAction",
+    (object)[
+        "@type" => "BuyAction",
         "instrument" => ["laptop","pc","tablet","phone"]
     ],
-    [
-        "type" => "AskAction",
+    (object)[
+        "@type" => "AskAction",
         "instrument" => ["laptop","pc","tablet","phone"]
     ],
-    [
-        "type" => "InteractAction",
+    (object)[
+        "@type" => "InteractAction",
         "instrument" => ["laptop","pc","tablet","phone"],
         "target" => [
-            "type" => "EntryPoint",
+            "@type" => "EntryPoint",
             "actionPlatform" => "https://schema.org/DigitalPlatformEnumeration"
         ]
     ]

@@ -150,60 +150,12 @@ class ServicePostSchema implements Schema
             "broker" => $this->buildAuthor($this->broker ?? null),
             "provider" => $this->buildAuthor($this->provider ?? null),
             "providerMobility" => $this->providerMobility ?? '',
-            "hoursAvailable" => $this->buildDataHoursAvailable($this->hoursAvailable ?? []),
-            "potentialAction" => $this->buildDataPotentialAction($this->potentialAction ?? []),
+            "hoursAvailable" => $this->hoursAvailable ?? [],
+            "potentialAction" => $this->potentialAction ?? [],
             "isSimilarTo" => $this->buildDataSimilar($this->isSimilarTo ?? []),
             "isRelatedTo" => $this->buildDataRelated($this->isRelatedTo ?? [])
         ];
         return json_encode($schema);
-    }
-
-    private function buildDataPotentialAction ($array = []) {
-        $listAction = [];
-        if ($array) {
-            foreach ($array as $item) {
-                $listAction[] = $this->buildAction($item ?? null);
-            }
-        }
-        return $listAction;
-    }
-
-    private function buildAction ($data = null) {
-         $action = (object)[
-            "@type" => $data['type'] ?? '',
-            "instrument" => $data['instrument'] ?? []
-        ];
-         if (isset($data['target'])) {
-             $action->target = $this->buildActionTarget($data['target'] ?? null);
-         }
-        return $action;
-    }
-
-    private function buildActionTarget ($data = null) {
-
-        return (object)[
-            "@type" => $data['type'] ?? '',
-            "actionPlatform" => $data['actionPlatform'] ?? ''
-        ];
-    }
-
-    private function buildDataHoursAvailable ($array = []) {
-        $listHours = [];
-        if ($array) {
-            foreach ($array as $item) {
-                $listHours[] = $this->buildHoursAvailable($item ?? null);
-            }
-        }
-        return $listHours;
-    }
-
-    private function buildHoursAvailable ($data = null) {
-        return (object)[
-            "@type" => "OpeningHoursSpecification",
-            "dayOfWeek" => $data['dayOfWeek'] ?? '',
-            "opens" => $data['opens'] ?? '',
-            "closes" => $data['closes'] ?? ''
-        ];
     }
 
     private function buildDataSimilar ($array = []) {
