@@ -218,7 +218,7 @@ class BlogPostingSchema implements Schema
             "url" => $data['url'] ?? '',
             "width" => $data['width'] ?? 0,
             "height" => $data['height'] ?? 0,
-            "creator" => $this->buildAuthor($data['creator'] ?? null)
+            "creator" => $this->buildAuthor($data['creator'] ?? null) ?? ""
         ];
     }
 
