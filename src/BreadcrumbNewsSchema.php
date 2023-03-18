@@ -27,37 +27,35 @@ class  BreadcrumbNewsSchema {
 
     public function buildSchema(): string
     {
-        $html = '<div itemscope itemtype="https://schema.org/BreadcrumbList" class="breadcrumb_schema pt-15 pb-15">';
-        $html .= '<ul class="flexBox">';
-        $html .= '<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
-        $html .= '<a itemprop="item" href="' . $this->homeUrl .'">';
-        $html .= '<span itemprop="name">'. $this->homeTitle ?? ' Trang chủ' .'</span>';
-        $html .= '</a>';
-        $html .= '<meta itemprop="position" content="1" />';
-        $html .= '</li>';
+
+        $listElement = [
+        (object)[
+            "@type" => "ListItem",
+            "position" => 1,
+            "name" => $this->homeTitle,
+            "item" => $this->homeUrl
+        ]];
+
 
         if (isset($this->breadcrumbData) && count($this->breadcrumbData) > 0) {
             foreach ($this->breadcrumbData as $key => $item) {
-                $html .= '<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
-                if (!empty($item['url'])){
-                    $html .= '<a itemprop="item" href="' . $item['url'] . '">';
-                    $html .= '<span itemprop="name">' . $item['title'] . '</span>';
-                    $html .= '<meta itemprop="position" content="'. ($key + 2) .'" />';
-                    $html .= '</a>';
-                }
-                else{
-                    $html .= '<a itemprop="item" style="cursor: text">';
-                    $html .= '<span itemprop="name">' . $item['title'] . '</span>';
-                    $html .= '<meta itemprop="position" content="'. ($key + 2) .'" />';
-                    $html .= '</a>';
-                }
-                $html .= '</li>';
+                $listElement[] = (object)[
+                    "@type" => "ListItem",
+                    "position" => $key + 2,
+                    "name" => $item['title'] ?? '',
+                    "item" => $item['url'] ?? ''
+                ];
             }
         }
 
-        $html .= '</ul>';
-        $html .= '</div>';
-        return $html;
+
+        $finalJson = (object)[
+            "@context" => "https://schema.org",
+            "@type" => "BreadcrumbList",
+            "itemListElement" => $listElement
+        ];
+
+        return json_encode($finalJson);
     }
 
 }
