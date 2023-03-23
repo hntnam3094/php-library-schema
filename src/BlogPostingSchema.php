@@ -238,7 +238,7 @@ class BlogPostingSchema implements Schema
     {
         return (object)[
             "@type" => "Thing",
-            "@id" => ($data['id'] ?? $data['url']) ?? '',
+            "@id" => $data['id'] ?? '',
             "url" => $data['url'] ?? '',
             "mainEntityOfPage" => $data['mainEntityOfPage'] ?? '',
             "name" => $data['name'] ?? '',
