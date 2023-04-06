@@ -215,6 +215,7 @@ class BlogPostingSchema implements Schema
             "creditText" => $data['creditText'] ?? '',
             "copyrightNotice" => $data['copyrightNotice'] ?? '',
             "caption" => $data['caption'] ?? '',
+            "description" => $data['description'] ?? '',
             "url" => $data['url'] ?? '',
             "width" => $data['width'] ?? 0,
             "height" => $data['height'] ?? 0,
