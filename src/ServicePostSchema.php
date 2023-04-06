@@ -199,6 +199,7 @@ class ServicePostSchema implements Schema
             "copyrightNotice" => $data['copyrightNotice'] ?? '',
             "alternativeHeadline" => $data['alternativeHeadline'] ?? '',
             "caption" => $data['caption'] ?? '',
+            "description" => $data['description'] ?? '',
             "contentUrl" => $data['url'] ?? '',
             "width" => $data['width'] ?? '',
             "height" => $data['height'] ?? '',

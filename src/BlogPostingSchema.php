@@ -215,7 +215,6 @@ class BlogPostingSchema implements Schema
             "creditText" => $data['creditText'] ?? '',
             "copyrightNotice" => $data['copyrightNotice'] ?? '',
             "caption" => $data['caption'] ?? '',
-            "description" => $data['description'] ?? '',
             "url" => $data['url'] ?? '',
             "width" => $data['width'] ?? 0,
             "height" => $data['height'] ?? 0,
@@ -239,7 +238,7 @@ class BlogPostingSchema implements Schema
     {
         return (object)[
             "@type" => "Thing",
-            "@id" => $data['id'] ?? '',
+            "@id" => ($data['id'] ?? $data['url']) ?? '',
             "url" => $data['url'] ?? '',
             "mainEntityOfPage" => $data['mainEntityOfPage'] ?? '',
             "name" => $data['name'] ?? '',
