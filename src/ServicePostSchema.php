@@ -198,9 +198,8 @@ class ServicePostSchema implements Schema
             "creditText" => $data['creditText'] ?? '',
             "copyrightNotice" => $data['copyrightNotice'] ?? '',
             "alternativeHeadline" => $data['alternativeHeadline'] ?? '',
-            "thumbnailUrl" =>  $data['thumbnailUrl'] ?? '',
             "caption" => $data['caption'] ?? '',
-            "url" => $data['url'] ?? '',
+            "contentUrl" => $data['url'] ?? '',
             "width" => $data['width'] ?? '',
             "height" => $data['height'] ?? '',
             "creator" => $this->buildAuthor($data['creator'] ?? null)
@@ -262,6 +261,7 @@ class ServicePostSchema implements Schema
             "@type" => "Place",
             "address" =>  (object)[
                 "@type" =>  "PostalAddress",
+                "addressCountry" => $data['addressCountry'] ?? '',
                 "addressLocality" => $data['addressLocality'] ?? '',
                 "addressRegion" => $data['addressRegion'] ?? '',
                 "postalCode" => $data['postalCode'] ?? '',
